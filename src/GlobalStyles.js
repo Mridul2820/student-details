@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -10,10 +10,6 @@ const GlobalStyle = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
     }
 
-    /* html {
-        scroll-behavior: smooth;
-    } */
-
     body {
         background-color: #fafafa;
     }
@@ -22,6 +18,14 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         color: unset;
     }
+`
+
+export const Button = styled.button`
+    padding: 5px 15px;
+    background: #ccc;
+    border: 1px solid #444;
+    margin-top: 10px;
+    border-radius: 2px;
 `
 
 export default GlobalStyle

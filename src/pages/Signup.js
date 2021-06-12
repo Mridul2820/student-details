@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { Button } from '../GlobalStyles';
 
 const Signup = () => {
-
     return (
         <SignupContainer>
             <SignupMain>
@@ -73,13 +73,6 @@ const InputGroup = styled.div`
         padding: 5px;
         width: 250px;
     }
-`
-
-const Button = styled.button`
-    padding: 5px 15px;
-    background: #ccc;
-    border: 1px solid #444;
-    margin-top: 10px;
 `
 
 const LoginLink = styled.div`

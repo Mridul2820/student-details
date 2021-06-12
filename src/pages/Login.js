@@ -1,22 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import { auth } from '../firebase/firebase'
 
 const Login = () => {
+    const history = useHistory()
+
+    const [emailAddress, setEmailAddress] = useState('')
+    const [password, setPassword] = useState('')
+
+    const [error, setError] = useState('')
+
+    const isInvalid = password === '' || emailAddress === ''
+
+    const handleLogin = async (e) => {
+        e.preventDefault()
+
+        try {
+            await auth.signInWithEmailAndPassword(emailAddress, password)
+            history.push('/')
+        } catch (error) {
+            setPassword('')
+            setError(error.message)
+        }
+    }
+
     return (
         <LoginContainer>
             <LoginMain>
                 <h1>Login to Your Account</h1>
-                <Form>
+                <Form onSubmit={handleLogin} method="POST">
                     <InputGroup>
                         <label>Email ID</label>
-                        <input type="email" />
+                        <input 
+                            aria-label="Enter Your Email Address"
+                            type="email" 
+                            onChange={({ target }) => setEmailAddress(target.value)}
+                        />
                     </InputGroup>
                     <InputGroup>
                         <label>Password</label>
-                        <input type="password" />
+                        <input
+                            aria-label="Enter Your Password"
+                            type="password"
+                            onChange={({ target }) => setPassword(target.value)}
+                            autoComplete="on"    
+                        />
                     </InputGroup>
-                    <Button type="submit">Submit</Button>
+                    <Button 
+                        type="submit" 
+                        disabled={isInvalid}
+                    >
+                        Submit
+                    </Button>
                 </Form>
                 <SignupLink>
                     <p>Don't have an acoount?</p>

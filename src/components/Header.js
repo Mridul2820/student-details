@@ -1,12 +1,14 @@
 import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+
 import { AiFillBell } from 'react-icons/ai'
 import { FaUserAlt } from 'react-icons/fa'
-import styled from 'styled-components'
 
 const Header = () => {
     return (
         <Container>
-            <LeadLogo>LEAD Logo</LeadLogo>
+            <LeadLogo to="/">LEAD Logo</LeadLogo>
             <User>
                 <AiFillBell size="24px" />
                 <FaUserAlt size="18px" />
@@ -26,7 +28,7 @@ const Container  = styled.div`
     border: 2px solid #000;
 `
 
-const LeadLogo  = styled.div`
+const LeadLogo  = styled(Link)`
     padding: 5px 20px;
     border: 2px solid #000;
 `

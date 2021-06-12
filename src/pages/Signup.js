@@ -6,7 +6,7 @@ const Signup = () => {
     return (
         <SignupContainer>
             <SignupMain>
-                <h1>Create an Account</h1>
+                <h1>Create a New Account</h1>
                 <Form>
                     <InputGroup>
                         <label>Email ID</label>

@@ -11,7 +11,7 @@ const Login = () => {
                 <h1>Login to Your Account</h1>
                 <Form>
                     <InputGroup>
-                        <label>Email ID</label>
+                        <label>Email ID / Phone Number</label>
                         <input 
                             aria-label="Enter Your Email Address"
                             type="email" 

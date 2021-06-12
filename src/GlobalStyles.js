@@ -26,6 +26,7 @@ export const Button = styled.button`
     border: 1px solid #444;
     margin-top: 10px;
     border-radius: 2px;
+    cursor: pointer;
 `
 
 export default GlobalStyle

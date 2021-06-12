@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const SideBar = () => {
 
@@ -9,10 +9,14 @@ const SideBar = () => {
             <ul>
                 <li>Students</li>
                 <li>
-                    <Link to="/students">- View Students</Link>
+                    <NavLink to="/students" activeClassName="active">
+                        - View Students
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/student/add">- Add Student</Link>
+                    <NavLink to="/student/add" activeClassName="active">
+                        - Add Student
+                    </NavLink>
                 </li>
                 <li></li>
                 <li></li>
@@ -33,8 +37,7 @@ const SideBar = () => {
 }
 
 const Container = styled.div`
-    width: 300px;
-    height: calc(100vh - 70px);
+    min-height: calc(100vh - 70px);
     border: 1px solid #000;
 
     ul {
@@ -42,10 +45,21 @@ const Container = styled.div`
 
         li {
             border-bottom: 1px solid #000;
-            height: 40px;
+            min-height: 40px;
             display: flex;align-items: center;
-            padding-left: 10px;
             cursor: pointer;
+            max-width: 250px;
+
+            a {
+                width: 250px;
+                min-height: 40px;
+                padding-left: 10px;
+                padding-top: 7px;
+            }
+
+            .active {
+                background-color: #95BCF2;
+            }
         }
     }
 `

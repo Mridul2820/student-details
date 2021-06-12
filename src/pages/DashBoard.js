@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import SideBar from '../components/SideBar'
 import StudentView from '../components/studentview/StudentView'
 import StudentAdd from '../components/StudentAdd'
+import StudentEdit from '../components/StudentEdit';
 
 const DashBoard = () => {
 
@@ -16,6 +17,7 @@ const DashBoard = () => {
                 <Switch>
                     <Route path="/students" component={StudentView} />
                     <Route path="/student/add" component={StudentAdd} />
+                    <Route path="/student/edit" component={StudentEdit} />
                 </Switch>
             </Container>
         </Router>

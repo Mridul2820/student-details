@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import EditDeleteForm from '../components/EditDeleteForm'
+import EditDeleteForm from './EditDeleteForm'
 
-const StudentAdd = () => {
+const StudentEdit = () => {
     return (
         <Container>
             <h1>Add Student</h1>
@@ -22,6 +22,4 @@ const Container = styled.div`
     }
 `
 
-
-
-export default StudentAdd
+export default StudentEdit

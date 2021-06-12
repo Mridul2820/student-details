@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import data from '../../data'
@@ -32,7 +33,9 @@ const StudentTable = () => {
                             <td>{student.division}</td>
                             <td>{student.active ? "Active" : "Inactive"}</td>
                             <td>
-                                <span className="edit">Edit</span>
+                                <Link to="/student/edit" className="edit">
+                                    Edit
+                                </Link>
                                 <span className="delete">Delete</span>
                             </td>
                         </tr>
@@ -63,7 +66,7 @@ const Table = styled.table`
         background-color: #EEEEEE;
     }
 
-    span {
+    span, a {
         color: #5F7EAA;
         text-decoration: underline;
 

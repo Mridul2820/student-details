@@ -1,56 +1,29 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { Link, useHistory } from 'react-router-dom'
-import { auth } from '../firebase/firebase'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
-    const history = useHistory()
-
-    const [emailAddress, setEmailAddress] = useState('')
-    const [password, setPassword] = useState('')
-
-    const [error, setError] = useState('')
-
-    const isInvalid = password === '' || emailAddress === ''
-
-    const handleLogin = async (e) => {
-        e.preventDefault()
-
-        try {
-            await auth.signInWithEmailAndPassword(emailAddress, password)
-            history.push('/')
-        } catch (error) {
-            setPassword('')
-            setError(error.message)
-        }
-    }
 
     return (
         <LoginContainer>
             <LoginMain>
                 <h1>Login to Your Account</h1>
-                <Form onSubmit={handleLogin} method="POST">
+                <Form>
                     <InputGroup>
                         <label>Email ID</label>
                         <input 
                             aria-label="Enter Your Email Address"
                             type="email" 
-                            onChange={({ target }) => setEmailAddress(target.value)}
                         />
                     </InputGroup>
                     <InputGroup>
                         <label>Password</label>
                         <input
                             aria-label="Enter Your Password"
-                            type="password"
-                            onChange={({ target }) => setPassword(target.value)}
-                            autoComplete="on"    
+                            type="password"   
                         />
                     </InputGroup>
-                    <Button 
-                        type="submit" 
-                        disabled={isInvalid}
-                    >
+                    <Button>
                         Submit
                     </Button>
                 </Form>

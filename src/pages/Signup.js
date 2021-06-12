@@ -1,8 +1,8 @@
-import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const Signup = () => {
+
     return (
         <SignupContainer>
             <SignupMain>
@@ -10,13 +10,19 @@ const Signup = () => {
                 <Form>
                     <InputGroup>
                         <label>Email ID</label>
-                        <input type="email" />
+                        <input
+                            aria-label="Enter Your Email Address"
+                            type="email"
+                        />
                     </InputGroup>
                     <InputGroup>
                         <label>Password</label>
-                        <input type="password" />
+                        <input
+                            aria-label="Enter Your Password"
+                            type="password"
+                        />
                     </InputGroup>
-                    <Button type="submit">Submit</Button>
+                    <Button>Submit</Button>
                 </Form>
                 <LoginLink>
                     <p>Already have an acoount?</p>

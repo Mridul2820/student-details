@@ -50,7 +50,6 @@ const StudentAdd = () => {
 
     const {
         values,
-        setValues,
         error, 
         setError,
         handleInputChange,

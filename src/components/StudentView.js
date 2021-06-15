@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Button } from '../GlobalStyles';
 
 import { TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
+import Controls from "./controls/Controls";
 import { getAllStudents } from '../services/localStorage'
 import useTable from '../hooks/useTable';
 import data from '../data';
@@ -11,7 +12,7 @@ import data from '../data';
 
 const StudentView = () => {
     const [records, setRecords] = useState([...data, ...getAllStudents()])
-
+    const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
     console.log('records', records);
 
     const headCells = [
@@ -30,19 +31,29 @@ const StudentView = () => {
         TblHead,
         TblPagination,
         recordsAfterPagingAndSorting
-    } = useTable(records, headCells);
+    } = useTable(records, headCells, filterFn);
+
+    const handleSearch = e => {
+        let target = e.target;
+        setFilterFn({
+            fn: items => {
+                if (target.value === "")
+                    return items;
+                else
+                    return items.filter(x => x.name.toLowerCase().includes(target.value))
+            }
+        })
+    }
 
 
     return (
         <Container>
-            {/* <Header>
-                <input 
-                    type="text" 
-                    placeholder="Name" 
-                    value={searchName}
-                    onChange={(e) => setSearchName(e.target.value)}
+            <Toolbar>
+                <Controls.Input
+                    label="Name"
+                    onChange={handleSearch}
                 />
-            </Header> */}
+            </Toolbar>
             <TblContainer>
                 <TblHead />
                 <TableBody>
@@ -72,6 +83,8 @@ const Container = styled.div`
     ${Button} {
         display: flex;
         align-items: center;
+        margin-top: 0;
+        padding: 5px 8px;
 
         svg {
             margin-right: 5px;
@@ -98,10 +111,21 @@ const Container = styled.div`
     tr:nth-child(even) {
         background-color: #EEEEEE;
     }
+
+    .MuiInputBase-input {
+        width: 150px;
+    }
+
+    .MuiOutlinedInput-input {
+        padding: 14px ;
+    }
+
+    .MuiToolbar-regular {
+        min-height: 24px;
+        padding: 0;
+        margin-bottom: 10px;
+    }
 `
 
-const Header = styled.div`
-
-` 
 
 export default StudentView

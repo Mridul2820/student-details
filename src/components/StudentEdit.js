@@ -1,13 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import EditDeleteForm from './EditDeleteForm'
 
 const StudentEdit = () => {
     return (
         <Container>
             <h1>Add Student</h1>
 
-            <EditDeleteForm />
         </Container>
     )
 }

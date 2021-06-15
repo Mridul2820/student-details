@@ -1,75 +1,75 @@
 const data = [
     {
+        id : 0,
+        name : 'Student B',
+        dob : '2010-01-01T00:00:00.000Z',
+        school : 'School A',
+        classStu : '5',
+        division: 'A',
+        status: "inactive"
+    },
+    {
         id : 1,
         name : 'Student A',
-        age : 12,
-        school : 'Lead School Karmala',
-        class : 3,
-        division: 'A',
-        active: true
+        dob : '2010-01-01T00:00:00.000Z',
+        school : 'School A',
+        classStu : '6',
+        division: 'B',
+        status: "active"
     },
     {
         id : 2,
         name : 'Student B',
-        age : 10,
-        school : 'Lead School Karmala',
-        class : 3,
+        dob : '2010-01-01T00:00:00.000Z',
+        school : 'School A',
+        classStu : '6',
         division: 'A',
-        active: true
+        status: "active"
     },
     {
         id : 3,
         name : 'Student C',
-        age : 11,
-        school : 'Lead School Karmala',
-        class : 3,
+        dob : '2010-01-01T00:00:00.000Z',
+        school : 'School B',
+        classStu : '7',
         division: 'A',
-        active: true
+        status: "active"
     },
     {
         id : 4,
         name : 'Student D',
-        age : 10,
-        school : 'Lead School Karmala',
-        class : 3,
+        dob : '2010-01-01T00:00:00.000Z',
+        school : 'School B',
+        classStu : '7',
         division: 'C',
-        active: true
+        status: "active"
     },
     {
         id : 5,
         name : 'Student E',
-        age : 11,
-        school : 'Lead School Karmala',
-        class : 3,
+        dob : '2010-01-01T00:00:00.000Z',
+        school : 'School B',
+        classStu : '6',
         division: 'A',
-        active: false
+        status: "inactive"
     },
     {
         id : 6,
         name : 'Student F',
-        age : 12,
-        school : 'Lead School Karmala',
-        class : 3,
+        dob : '2010-01-01T00:00:00.000Z',
+        school : 'School C',
+        classStu : '6',
         division: 'B',
-        active: true
+        status: "active"
     },
     {
         id : 7,
         name : 'Student A',
-        age : 10,
-        school : 'Lead School Karmala',
-        class : 3,
+        dob : '2010-01-01T00:00:00.000Z',
+        school : 'School C',
+        classStu : '7',
         division: 'A',
-        active: true
-    },
-    {
-        id : 8,
-        name : 'Student B',
-        age : 10,
-        school : 'Lead School Karmala',
-        class : 3,
-        division: 'B',
-        active: false
+        status: "active"
     }
 ]
 

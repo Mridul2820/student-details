@@ -1,0 +1,107 @@
+import React, { useState } from 'react'
+import styled from 'styled-components'
+
+import { Button } from '../GlobalStyles';
+
+import { TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
+import { getAllStudents } from '../services/localStorage'
+import useTable from '../hooks/useTable';
+import data from '../data';
+
+
+const StudentView = () => {
+    const [records, setRecords] = useState([...data, ...getAllStudents()])
+
+    console.log('records', records);
+
+    const headCells = [
+        { id: 'id', label: 'Id', disableSorting: true },
+        { id: 'name', label: 'Name' },
+        { id: 'age', label: 'Age' },
+        { id: 'school', label: 'School' },
+        { id: 'class', label: 'Class' },
+        { id: 'division', label: 'Division' },
+        { id: 'status', label: 'Status' },
+        { id: 'options', label: 'Options', disableSorting: true },
+    ]
+
+    const {
+        TblContainer,
+        TblHead,
+        TblPagination,
+        recordsAfterPagingAndSorting
+    } = useTable(records, headCells);
+
+
+    return (
+        <Container>
+            {/* <Header>
+                <input 
+                    type="text" 
+                    placeholder="Name" 
+                    value={searchName}
+                    onChange={(e) => setSearchName(e.target.value)}
+                />
+            </Header> */}
+            <TblContainer>
+                <TblHead />
+                <TableBody>
+                {recordsAfterPagingAndSorting().map(record => (
+                    <TableRow key={record.id}>
+                        <TableCell>{record.id + 1}</TableCell>
+                        <TableCell>{record.name}</TableCell>
+                        <TableCell>{new Date().getFullYear() - new Date(record.dob).getFullYear()}</TableCell>
+                        <TableCell>{record.school}</TableCell>
+                        <TableCell>{record.classStu}</TableCell>
+                        <TableCell>{record.division}</TableCell>
+                        <TableCell>{record.status}</TableCell>
+                        <TableCell><Button>Delete</Button></TableCell>
+                    </TableRow>
+                ))}
+                </TableBody>
+            </TblContainer>
+            <TblPagination ></TblPagination>
+        </Container>
+    )
+}
+
+const Container = styled.div`
+    padding: 20px 50px;
+    width: 100%;
+
+    ${Button} {
+        display: flex;
+        align-items: center;
+
+        svg {
+            margin-right: 5px;
+        }
+    }
+
+    table {
+        width: 100%;
+        border: 1px solid black;
+        border-spacing: 0;
+    }
+
+    thead {
+        background-color: #95BCF2;
+    }
+
+    th, td {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        padding: 5px 10px;
+        text-align: left;
+    }
+
+    tr:nth-child(even) {
+        background-color: #EEEEEE;
+    }
+`
+
+const Header = styled.div`
+
+` 
+
+export default StudentView

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Header from '../components/Header'
 import SideBar from '../components/SideBar'
-import StudentView from '../components/studentview/StudentView'
+import StudentView from '../components/StudentView'
 import StudentAdd from '../components/StudentAdd'
 import StudentEdit from '../components/StudentEdit';
 

@@ -20,7 +20,6 @@ const initialFValues = {
     classStu: '',
     division: '',
     status: 'active',
-    hireDate: new Date(),
 }
 
 const StudentAdd = () => {

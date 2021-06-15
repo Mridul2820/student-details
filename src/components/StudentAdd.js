@@ -5,6 +5,7 @@ import { useForm, Form } from '../hooks/useForm';
 
 import Controls from './controls/Controls'
 import * as collections from "../services/collcetion";
+import * as storage from "../services/localStorage";
 
 const statusItems = [
     { id: 'active', title: 'Active' },
@@ -23,17 +24,38 @@ const initialFValues = {
 }
 
 const StudentAdd = () => {
-    const handleSubmit = (e) => {
-        e.preventDefault();
 
-        
-    };
+    const validate = (fieldValues = values) => {
+        let temp = { ...error }
+        temp.name = fieldValues.name ? "" : "This field is required."
+        temp.school = fieldValues.school.length !== 0 ? "" : "This field is required."
+        temp.school = fieldValues.school.length !== 0 ? "" : "This field is required."
+        temp.classStu = fieldValues.classStu.length !== 0 ? "" : "This field is required."
+        temp.division = fieldValues.division.length !== 0 ? "" : "This field is required."
+            setError({
+            ...temp
+        })
+
+        return Object.values(temp).every(x => x === "")
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        if (validate()){
+            window.alert('done')
+            resetForm()
+            storage.insertStudent(values)
+        }
+    }
 
 
     const {
         values,
         setValues,
+        error, 
+        setError,
         handleInputChange,
+        resetForm
     } = useForm(initialFValues);
 
 
@@ -48,6 +70,7 @@ const StudentAdd = () => {
                         label="Name"
                         value={values.name}
                         onChange={handleInputChange}
+                        err={error.name}
                     />
                 </InputGrp>
                 <InputGrp>
@@ -64,9 +87,11 @@ const StudentAdd = () => {
 
                     <Controls.Select
                         name="school"
+                        label="School"
                         value={values.school}
                         onChange={handleInputChange}
                         options={collections.getSchoolCollection()}
+                        err={error.school}
                     />
                 </InputGrp>
 
@@ -75,9 +100,11 @@ const StudentAdd = () => {
 
                     <Controls.Select
                         name="classStu"
+                        label="Class"
                         value={values.classStu}
                         onChange={handleInputChange}
                         options={collections.getClassCollection()}
+                        err={error.classStu}
                     />
                 </InputGrp>
 
@@ -86,9 +113,11 @@ const StudentAdd = () => {
 
                     <Controls.Select
                         name="division"
+                        label="Division"
                         value={values.division}
                         onChange={handleInputChange}
                         options={collections.getDivisionCollection()}
+                        err={error.division}
                     />
                 </InputGrp>
 
@@ -134,8 +163,16 @@ const InputGrp  =styled.div`
     align-items: center;
     margin-top: 20px;
 
-    label {
+    label, .MuiInputBase-input {
         width: 150px;
+    }
+
+    .MuiOutlinedInput-input {
+        padding: 14px ;
+    }
+
+    .MuiFormHelperText-root {
+        color: red;
     }
 `
 

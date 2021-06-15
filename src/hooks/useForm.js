@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 export function useForm(initialFValues) {
 
     const [values, setValues] = useState(initialFValues);
+    const [error, setError] = useState({})
 
     const handleInputChange = (e) => {
         const {name, value} = e.target
@@ -13,12 +14,18 @@ export function useForm(initialFValues) {
         })
     }
 
+    const resetForm = () => {
+        setValues(initialFValues);
+        setError({})
+    }
 
     return {
         values,
         setValues,
         handleInputChange,
-
+        error, 
+        setError,
+        resetForm
     }
 }
 

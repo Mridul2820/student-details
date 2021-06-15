@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import data from '../../data'
+// import { db } from '../../firebase/firebase'
 
-const StudentTable = () => {
-    const [students] = useState(data)
+
+const StudentTable = ({ students }) => {
+    console.log("students", students);
+
+    // const deleteStudent = (id) => {
+    //     db.collection('students').doc(id).delete()
+    // }
 
     return (
         <div>
@@ -23,20 +27,22 @@ const StudentTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {students.map(student => (
+                    {students.map((student, index) => (
                         <tr key={student.id} >
-                            <td>{student.id}</td>
-                            <td>{student.name}</td>
-                            <td>{student.age}</td>
-                            <td>{student.school}</td>
-                            <td>{student.class}</td>
-                            <td>{student.division}</td>
-                            <td>{student.active ? "Active" : "Inactive"}</td>
+                            <td>{index + 1}</td>
+                            <td>{student.value.name}</td>
+                            <td>
+                                {new Date().getFullYear() - new Date(student.value.date).getFullYear()}
+                            </td>
+                            <td>{student.value.school}</td>
+                            <td>{student.value.classSt}</td>
+                            <td>{student.value.division}</td>
+                            <td>{student.value.active}</td>
                             <td>
                                 <Link to="/student/edit" className="edit">
                                     Edit
                                 </Link>
-                                <span className="delete">Delete</span>
+                                <button>Delete</button>
                             </td>
                         </tr>
                     ))}
@@ -69,6 +75,7 @@ const Table = styled.table`
     span, a {
         color: #5F7EAA;
         text-decoration: underline;
+        cursor: pointer;
 
         &.edit {
             margin-right: 8px;

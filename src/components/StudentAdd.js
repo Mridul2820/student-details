@@ -1,41 +1,41 @@
-import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Button } from '../GlobalStyles'
-import { db } from '../firebase/firebase'
+import { useForm, Form } from '../hooks/useForm';
+
+
+import Controls from './controls/Controls'
+import * as collections from "../services/collcetion";
+
+const statusItems = [
+    { id: 'active', title: 'Active' },
+    { id: 'inactive', title: 'Inactive' },
+]
+
+const initialFValues = {
+    id: 0,
+    name: '',
+    dob: new Date('2010-01-01'),
+    school: '',
+    classStu: '',
+    division: '',
+    status: 'active',
+    hireDate: new Date(),
+}
 
 const StudentAdd = () => {
-    const [name, setName] = useState('')
-    const [date, setDate] = useState('')
-    const [school, setSchool] = useState('School A')
-    const [classSt, setClassSt] = useState('3')
-    const [grade, setGrade] = useState('A')
-    const [active, setActive] = useState('Active')
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        db.collection("students")
-            .add({
-                name: name,
-                date: date,
-                school: school,
-                classSt: classSt,
-                grade: grade,
-                active: active,
-            })
-            .then(() => {
-                alert("Student Added");
-            })
-            .catch((error) => {
-                alert(error.message);
-            });
-
-        setName("");
-        setDate("");
-        setGrade("Active");
+        
     };
 
-    // console.log('classSt', classSt);
+
+    const {
+        values,
+        setValues,
+        handleInputChange,
+    } = useForm(initialFValues);
+
 
     return (
         <Container>
@@ -43,73 +43,63 @@ const StudentAdd = () => {
             <Form onSubmit={handleSubmit}>
                 <InputGrp>
                     <label>Full Name</label>
-                    <input 
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        type="text" 
-                        placeholder="Name" 
-                        required
+                    <Controls.Input 
+                        name="name"
+                        label="Name"
+                        value={values.name}
+                        onChange={handleInputChange}
                     />
                 </InputGrp>
                 <InputGrp>
                     <label>Date of Birth</label>
-                    <input 
-                        type="date" 
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                        required
+                    <Controls.DatePicker
+                        name="dob"
+                        value={values.dob}
+                        onChange={handleInputChange}
                     />
                 </InputGrp>
 
                 <InputGrp>
                     <label>School</label>
-                    
-                    <select onChange={e => setSchool(e.target.value)} required>
-                        {/* <option value="" disabled defaultValue>School Name</option> */}
-                        <option value="School A">School A</option>
-                        <option value="School B">School B</option>
-                        <option value="School C">School C</option>
-                    </select>
+
+                    <Controls.Select
+                        name="school"
+                        value={values.school}
+                        onChange={handleInputChange}
+                        options={collections.getSchoolCollection()}
+                    />
                 </InputGrp>
+
                 <InputGrp>
                     <label>Class</label>
-                    <select onChange={e => setClassSt(e.target.value)} required>
-                        {/* <option value="" disabled defaultValue>Class</option> */}
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+
+                    <Controls.Select
+                        name="classStu"
+                        value={values.classStu}
+                        onChange={handleInputChange}
+                        options={collections.getClassCollection()}
+                    />
                 </InputGrp>
+
                 <InputGrp>
                     <label>Division</label>
-                    <select onChange={e => setGrade(e.target.value)} required>
-                        {/* <option value="" disabled defaultValue>Division</option> */}
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                    </select>
+
+                    <Controls.Select
+                        name="division"
+                        value={values.division}
+                        onChange={handleInputChange}
+                        options={collections.getDivisionCollection()}
+                    />
                 </InputGrp>
+
                 <InputGrp>
                     <label>Status</label>
-                    <Radio>
-                        <input 
-                            type="radio" 
-                            id="active" 
-                            name="status" 
-                            value="Active" 
-                            onClick={() => setActive('Active')}
-                        />
-                        <label>Active</label>
-
-                        <input 
-                            type="radio" 
-                            id="inactive" 
-                            name="status" 
-                            value="Inactive" 
-                            onClick={() => setActive('Inactive')}
-                        />
-                        <label>Inactive</label>
-                    </Radio>
+                    <Controls.RadioGroup 
+                        name="status" 
+                        value={values.status} 
+                        onChange={handleInputChange}
+                        items={statusItems}
+                    />
                 </InputGrp>
                 <InputGrp>
                     <label></label>
@@ -139,8 +129,6 @@ const Container = styled.div`
     }
 `
 
-const Form = styled.form``
-
 const InputGrp  =styled.div`
     display: flex;
     align-items: center;
@@ -149,32 +137,6 @@ const InputGrp  =styled.div`
     label {
         width: 150px;
     }
-
-    input, select {
-        padding: 5px;
-        margin-right: 10px;
-        width: 150px;
-    }
-
-    option[value=""][disabled] {
-        display: none;
-    }
 `
-
-const Radio = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    input {
-        width: unset;
-    }
-
-    label {
-        width: unset;
-        margin-right: 30px;
-    }
-`
-
 
 export default StudentAdd

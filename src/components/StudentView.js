@@ -49,7 +49,7 @@ const StudentView = ({ setEditRecord }) => {
     }
 
     const handleEdit = (item) => {
-        history.push('/student/edit')
+        history.push('/student/add')
         setEditRecord(item)
     }
 

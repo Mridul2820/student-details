@@ -6,6 +6,7 @@ import { useForm, Form } from '../hooks/useForm';
 import Controls from './controls/Controls'
 import * as collections from "../services/collcetion";
 import * as storage from "../services/localStorage";
+import { useEffect } from 'react';
 
 const statusItems = [
     { id: 'active', title: 'Active' },
@@ -22,7 +23,7 @@ const initialFValues = {
     status: 'active',
 }
 
-const StudentAdd = () => {
+const StudentAdd = ({ editRecord }) => {
 
     const validate = (fieldValues = values) => {
         let temp = { ...error }
@@ -49,11 +50,25 @@ const StudentAdd = () => {
 
     const {
         values,
+        setValues,
         error, 
         setError,
         handleInputChange,
         resetForm
     } = useForm(initialFValues);
+
+
+    useEffect(() => {
+        if (editRecord !== null)
+            setValues({
+                ...editRecord
+            })
+            // eslint-disable-next-line
+    }, [editRecord])
+
+    console.log('values', values);
+    console.log('editRecord', editRecord);
+
 
     return (
         <Container>

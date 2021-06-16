@@ -11,22 +11,20 @@ import { useState } from 'react';
 const DashBoard = () => {
     const [editRecord, setEditRecord] = useState(null)
 
-    console.log('editRecord', editRecord);
-
     return (
         <Router>
             <Header />
             <Container>
                 <SideBar/>
                 <Switch>
+                    <Route path="/student/edit">
+                        <StudentEdit editRecord={editRecord} />
+                    </Route>
                     <Route path="/students">
                         <StudentView setEditRecord={setEditRecord}/>
                     </Route>
                     <Route path="/student/add" >
                         <StudentAdd />
-                    </Route>
-                    <Route path="/student/edit">
-                        <StudentEdit editRecord={editRecord} />
                     </Route>
                 </Switch>
             </Container>

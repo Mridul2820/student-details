@@ -14,7 +14,7 @@ export function insertStudent(data) {
 
 export function deleteStudent(id) {
     let students = getAllStudents();
-    students = students.filter(x => x.id != id)
+    students = students.filter(x => x.id !== id)
     localStorage.setItem(KEYS.students, JSON.stringify(students));
 }
 

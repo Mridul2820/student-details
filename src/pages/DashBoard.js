@@ -6,8 +6,12 @@ import SideBar from '../components/SideBar'
 import StudentView from '../components/StudentView'
 import StudentAdd from '../components/StudentAdd'
 import StudentEdit from '../components/StudentEdit';
+import { useState } from 'react';
 
 const DashBoard = () => {
+    const [editRecord, setEditRecord] = useState(null)
+
+    console.log('editRecord', editRecord);
 
     return (
         <Router>
@@ -15,9 +19,15 @@ const DashBoard = () => {
             <Container>
                 <SideBar/>
                 <Switch>
-                    <Route path="/students" component={StudentView} />
-                    <Route path="/student/add" component={StudentAdd} />
-                    <Route path="/student/edit" component={StudentEdit} />
+                    <Route path="/students">
+                        <StudentView setEditRecord={setEditRecord}/>
+                    </Route>
+                    <Route path="/student/add" >
+                        <StudentAdd />
+                    </Route>
+                    <Route path="/student/edit">
+                        <StudentEdit editRecord={editRecord} />
+                    </Route>
                 </Switch>
             </Container>
         </Router>

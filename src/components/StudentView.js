@@ -5,16 +5,18 @@ import { Button } from '../GlobalStyles';
 
 import { TableBody, TableRow, TableCell, Toolbar } from '@material-ui/core';
 import Controls from "./controls/Controls";
-import { getAllStudents } from '../services/localStorage'
+import { getAllStudents, deleteStudent } from '../services/localStorage'
 import useTable from '../hooks/useTable';
 import data from '../data';
+import { useHistory } from 'react-router-dom';
 
 
-const StudentView = () => {
-     // eslint-disable-next-line
+const StudentView = ({ setEditRecord }) => {
     const [records, setRecords] = useState([...data, ...getAllStudents()])
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
     console.log('records', records);
+
+    const history = useHistory()
 
     const headCells = [
         { id: 'id', label: 'Id', disableSorting: true },
@@ -46,6 +48,15 @@ const StudentView = () => {
         })
     }
 
+    const handleEdit = (item) => {
+        history.push('/student/edit')
+        setEditRecord(item)
+    }
+
+    const handleDelete = (id) => {
+        deleteStudent(id)
+        setRecords([...data, ...getAllStudents()])
+    }
 
     return (
         <Container>
@@ -67,7 +78,14 @@ const StudentView = () => {
                         <TableCell>{record.classStu}</TableCell>
                         <TableCell>{record.division}</TableCell>
                         <TableCell>{record.status}</TableCell>
-                        <TableCell><Button>Delete</Button></TableCell>
+                        <TableCell>
+                            <Button onClick={() => handleEdit(record)}>
+                                Edit
+                            </Button>
+                            <Button onClick={() => handleDelete(record.id)}>
+                                Delete
+                            </Button>
+                        </TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
@@ -82,10 +100,11 @@ const Container = styled.div`
     width: 100%;
 
     ${Button} {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         margin-top: 0;
         padding: 5px 8px;
+        margin-right: 10px;
 
         svg {
             margin-right: 5px;

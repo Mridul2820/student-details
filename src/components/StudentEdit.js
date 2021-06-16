@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const StudentEdit = () => {
     return (
         <Container>
-            <h1>Add Student</h1>
+            <h1>Edit</h1>
 
         </Container>
     )

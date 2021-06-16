@@ -12,6 +12,13 @@ export function insertStudent(data) {
     localStorage.setItem(KEYS.students,JSON.stringify(students))
 }
 
+export function deleteStudent(id) {
+    let students = getAllStudents();
+    students = students.filter(x => x.id != id)
+    localStorage.setItem(KEYS.students, JSON.stringify(students));
+}
+
+
 export function generateStudentId() {
     if (localStorage.getItem(KEYS.studentID) == null)
         localStorage.setItem(KEYS.studentID, '8')
@@ -31,8 +38,8 @@ export function getAllStudents() {
 
     return students.map(x => ({
         ...x,
-        school: schools[x.school - 1].title,
-        classStu: classStus[x.classStu - 1].title,
-        division: divisions[x.division - 1].title
+        school: schools[x.school - 1]?.title,
+        classStu: classStus[x.classStu - 1]?.title,
+        division: divisions[x.division - 1]?.title
     }))
 }
